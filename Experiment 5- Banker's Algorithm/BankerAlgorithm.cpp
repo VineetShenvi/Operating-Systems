@@ -136,6 +136,7 @@ void calculateNeedMatrix(int nProcesses, int nResources, int maxMatrix[MAX][MAX]
 
 int main()
 {
+    cout << "Vineet Shenvi      C182       60004220012" << endl;
     int nProcesses, nResources;
     
     
