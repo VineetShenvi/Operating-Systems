@@ -24,27 +24,40 @@ struct memory
 struct memory m[MAX];
 struct process p[MAX];
 
-void BestFit(int nBlocks, int nProcesses)
+int nextAllocation = 0;
+int isAllocationDone = 0;
+
+void NextFit(int nBlocks, int nProcesses)
 {
     for (int i=0; i< nProcesses; i++)
     {
-        int minDiff = 99999, minIndex = 99999;
-        for (int j=0; j< nBlocks; j++)
+        isAllocationDone = 0;
+        for (int j=nextAllocation; j< nBlocks; j++)
         {
-            if (m[j].isEmpty == 1 && m[j].value >= p[i].value)
+            if (m[j].isEmpty && m[j].value >= p[i].value)
             {
-                if (m[j].value - p[i].value < minDiff)
-                {
-                    minDiff = m[j].value - p[i].value;
-                    minIndex = j;
-                }
+                m[j].processNumber = i;
+                m[j].isEmpty = 0;
+                p[i].isAllocated = 1;
+                nextAllocation =(j+1)%nBlocks;
+                isAllocationDone = 1;
+                break;
             }
         }
-        if (minIndex != 99999)
+        if (!isAllocationDone)
         {
-            m[minIndex].processNumber = i;
-            m[minIndex].isEmpty = 0;
-            p[i].isAllocated = 1;
+            for (int j=0; j< nextAllocation; j++)
+            {
+                if (m[j].isEmpty && m[j].value >= p[i].value)
+                {
+                    m[j].processNumber = i;
+                    m[j].isEmpty = 0;
+                    p[i].isAllocated = 1;
+                    nextAllocation =(j+1)%nBlocks;
+                    isAllocationDone = 1;
+                    break;
+                }
+            }
         }
     }
 }
@@ -106,7 +119,7 @@ int main()
     {
         cout << p[i].value << "    ";
     }
-    BestFit(nBlocks, nProcesses);
+    NextFit(nBlocks, nProcesses);
     printResults(nBlocks, nProcesses);
     return 0;
 }

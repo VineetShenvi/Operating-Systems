@@ -71,6 +71,7 @@ void printResults(int nBlocks, int nProcesses)
 
 int main()
 {
+    cout << "Vineet Shenvi    60004220012    C182" << endl << endl;
     int nBlocks, nProcesses;
     cout << "Enter the number of memory blocks: ";
     cin >> nBlocks;
