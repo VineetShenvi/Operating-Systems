@@ -168,23 +168,28 @@ void LeastFrequentlyUsed(int nFrames, int nPages, int pages[])
         }
         
     }
+    float hitPercent = float(nHits)/ float(nPages);
+    cout << endl << endl << "---------------------------------------" << endl << endl;
+    cout << "Number of hits : " << nHits << endl;
+    cout << "Number of misses : " << nPages - nHits << endl;
+    cout << "Hit percentage : " << hitPercent;
 }
 
 int main()
 {
-    // int nFrames, nPages;
-    // cout << "Enter the number of frames: ";
-    // cin >> nFrames;
-    // cout << "Enter the number of pages: ";
-    // cin >> nPages;
-    // int pages[nPages];
-    // cout << endl << "Enter the pages: " << endl;
-    // for (int i=0; i< nPages; i++)
-    // {
-    //     cin >> pages[i];
-    // }
-    int nFrames=3, nPages=15;
-    int pages[15] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2};
+    int nFrames, nPages;
+    cout << "Enter the number of frames: ";
+    cin >> nFrames;
+    cout << "Enter the number of pages: ";
+    cin >> nPages;
+    int pages[nPages];
+    cout << endl << "Enter the pages: " << endl;
+    for (int i=0; i< nPages; i++)
+    {
+        cin >> pages[i];
+     }
+    // int nFrames=3, nPages=12;
+    // int pages[15] = {6, 7, 8, 9, 6, 7, 1, 6, 7, 8, 9, 1};
     LeastFrequentlyUsed(nFrames, nPages, pages);
     return 0;
 }

@@ -106,8 +106,12 @@ void FirstInFirstOut(int nFrames, int nPages, int pages[])
             else
             cout << "     " << output;
         }
-        
     }
+    float hitPercent = float(nHits)/ float(nPages);
+    cout << endl << endl << "---------------------------------------" << endl << endl;
+    cout << "Number of hits : " << nHits << endl;
+    cout << "Number of misses : " << nPages - nHits << endl;
+    cout << "Hit percentage : " << hitPercent;
 }
 
 int main()
