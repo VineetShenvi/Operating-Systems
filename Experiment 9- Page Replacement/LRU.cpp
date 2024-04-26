@@ -34,6 +34,15 @@ int dequeue()
     return queue[front++];
 }
 
+void dequeueByValue(int i)
+{
+    for (int j=i; j>front; j--)
+    {
+        queue[i] = queue[i-1];
+    }
+    front++;
+}
+
 int findIndex(int currentState[], int n, int nFrames)
 {
     for (int i=0; i< nFrames; i++)
@@ -72,7 +81,11 @@ void LeastRecentlyUsed(int nFrames, int nPages, int pages[])
                 currentState[toBeReplacedIndex] = pages[i];
             }
             else
-            nHits++;
+            {
+                nHits++;
+                dequeueByValue(pages[i]);
+                enqueue(pages[i]);
+            }
         }
         else
         {
@@ -82,7 +95,11 @@ void LeastRecentlyUsed(int nFrames, int nPages, int pages[])
                 currentState[lastIndex++] = pages[i];
             }
             else
-            nHits++;
+            {
+                nHits++;
+                dequeueByValue(pages[i]);
+                enqueue(pages[i]);
+            }
         }
         for(int j=0; j<nFrames; j++)
         {
@@ -116,8 +133,8 @@ void LeastRecentlyUsed(int nFrames, int nPages, int pages[])
 
 int main()
 {
-    int nFrames, nPages, nProcesses;
     cout << "Vineet Shenvi    60004220012    C182" << endl << endl;
+    int nFrames, nPages, nProcesses;
     cout << "Enter the number of frames: ";
     cin >> nFrames;
     cout << "Enter the number of pages: ";
